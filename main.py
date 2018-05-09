@@ -54,6 +54,10 @@ def draw_lines(positions, inp):
             add_line([positions[vertex][0], positions[vertex][1]],
                      [positions[neighbour][0], positions[neighbour][1]])
 
+def annotate(positions):
+    for label, point in positions.items():
+        plt.gca().annotate(label, point)
+
 def solve_for(dimension: int, inp: dict, given:dict):
     equations = np.zeros((len(inp), len(inp)))
     results = np.zeros(len(inp))
@@ -80,7 +84,7 @@ def tutte(inp: dict, circle_vertices: list):
     pprint(positions)
     np.zeros((1, 3))
     len(inp)
-    vals = list(zip(solve_for(0, inp, positions), 
+    vals = list(zip(solve_for(0, inp, positions),
                     solve_for(1, inp, positions)))
     return dict(zip(inp.keys(), vals))
 
@@ -90,6 +94,7 @@ if __name__ == "__main__":
     results = tutte(gr2, [1, 2, 3, 7])
     pprint(results)
     draw_lines(results, gr2)
+    annotate(results)
 
     plt.show()
 
